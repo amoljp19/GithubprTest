@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
+            app:startDestination="@+id/requestIssues">
+
+    <activity android:id="@+id/mainActivity" android:name="com.softaai.githubprtest.MainActivity"
+              android:label="activity_main" tools:layout="@layout/activity_main"/>
+    <fragment android:id="@+id/requestIssues" android:name="com.softaai.githubprtest.RequestIssues"
+              android:label="fragment_request_issues" tools:layout="@layout/fragment_request_issues">
+        <action android:id="@+id/action_requestIssues_to_displayOpenIssues" app:destination="@id/displayOpenIssues"/>
+        <action android:id="@+id/action_requestIssues_to_displayClosedIssues"
+                app:destination="@id/displayClosedIssues"/>
+    </fragment>
+    <fragment android:id="@+id/displayOpenIssues" android:name="com.softaai.githubprtest.DisplayOpenIssues"
+              android:label="fragment_display_open_issues" tools:layout="@layout/fragment_display_open_issues"/>
+    <fragment android:id="@+id/displayClosedIssues" android:name="com.softaai.githubprtest.DisplayClosedIssues"
+              android:label="fragment_display_closed_issues" tools:layout="@layout/fragment_display_closed_issues"/>
+</navigation>
