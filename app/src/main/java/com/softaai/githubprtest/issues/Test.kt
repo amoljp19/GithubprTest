@@ -1,4 +1,4 @@
-package com.softaai.githubprtest.Issues
+package com.softaai.githubprtest.issues
 
 
 /**

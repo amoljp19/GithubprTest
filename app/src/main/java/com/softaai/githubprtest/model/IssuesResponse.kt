@@ -1,7 +1,11 @@
 package com.softaai.githubprtest.model
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.Ignore
+import android.arch.persistence.room.PrimaryKey
 import com.squareup.moshi.Json
 
+@Entity
 data class IssuesResponse(@Json(name = "pull_request")
                       val pullRequest: PullRequest,
                           @Json(name = "comments")
@@ -39,7 +43,7 @@ data class IssuesResponse(@Json(name = "pull_request")
                           @Json(name = "repository_url")
                       val repositoryUrl: String = "",
                           @Json(name = "id")
-                      val id: Int = 0,
+                     @PrimaryKey val id: Int = 0,
                           @Json(name = "state")
                       val state: String = "",
                           @Json(name = "assignee")

@@ -1,5 +1,6 @@
 package com.softaai.githubprtest.di
 
+import com.softaai.githubprtest.issues.adapters.IssueListAdapter
 import com.softaai.githubprtest.network.GithubIssuesApi
 import com.softaai.githubprtest.utils.BASE_URL
 import dagger.Module
@@ -25,6 +26,14 @@ object NetworkModule {
     @JvmStatic
     internal fun providePostApi(retrofit: Retrofit): GithubIssuesApi {
         return retrofit.create(GithubIssuesApi::class.java)
+    }
+
+
+    @Provides
+    @Reusable
+    @JvmStatic
+    internal fun provideIssueListAdapter(): IssueListAdapter {
+        return IssueListAdapter()
     }
 
 

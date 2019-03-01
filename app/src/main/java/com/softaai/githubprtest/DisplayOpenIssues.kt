@@ -1,12 +1,24 @@
 package com.softaai.githubprtest
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
+import android.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Bundle
+import android.support.annotation.StringRes
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.softaai.githubprtest.databinding.FragmentDisplayOpenIssuesBinding
+import com.softaai.githubprtest.di.ViewModelFactory
+import com.softaai.githubprtest.issues.adapters.IssueListAdapter
+import com.softaai.githubprtest.issues.viewmodels.IssuesListViewModel
+import javax.inject.Inject
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -29,20 +41,57 @@ class DisplayOpenIssues : Fragment() {
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
+    private lateinit var viewModel: IssuesListViewModel
+    private lateinit var binding : FragmentDisplayOpenIssuesBinding
+
+    lateinit var mAdapter: IssueListAdapter
+
+    private var errorSnackbar: Snackbar? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        binding = DataBindingUtil.inflate(inflater,
+            R.layout.fragment_display_open_issues, container, false)
+        var myView : View  = binding.root
+
+        binding.issuesList.layoutManager = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
+
+//        mAdapter = IssueListAdapter()
+//        binding.issuesList.setHasFixedSize(true)
+
+        viewModel = ViewModelProviders.of(activity!!, ViewModelFactory(this.activity as AppCompatActivity)).get(IssuesListViewModel::class.java)
+        viewModel.errorMessage.observe(this, Observer {
+                errorMessage -> if(errorMessage != null) showError(errorMessage) else hideError()
+        })
+
+        binding.openIssuesModel = viewModel
+
+
+        return myView
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_display_open_issues, container, false)
+        //return inflater.inflate(R.layout.fragment_display_open_issues, container, false)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.issuesList.adapter = mAdapter
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -98,5 +147,16 @@ class DisplayOpenIssues : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+
+    private fun showError(@StringRes errorMessage:Int){
+        errorSnackbar = Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_INDEFINITE)
+        //errorSnackbar?.setAction(R.string.retry, viewModel.errorClickListener)
+        errorSnackbar?.show()
+    }
+
+    private fun hideError(){
+        errorSnackbar?.dismiss()
     }
 }

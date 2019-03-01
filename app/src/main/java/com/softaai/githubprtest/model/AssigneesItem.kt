@@ -1,7 +1,9 @@
 package com.softaai.githubprtest.model
 
+import android.arch.persistence.room.Entity
 import com.squareup.moshi.Json
 
+@Entity
 data class AssigneesItem(@Json(name = "gists_url")
                          val gistsUrl: String = "",
                          @Json(name = "repos_url")

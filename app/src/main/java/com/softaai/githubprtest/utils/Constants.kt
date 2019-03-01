@@ -6,4 +6,4 @@ package com.softaai.githubprtest.utils
  * softAai Apps
  */
 
-const val BASE_URL: String = "https://api.github.com/repos"
+const val BASE_URL: String = "https://api.github.com/repos/"

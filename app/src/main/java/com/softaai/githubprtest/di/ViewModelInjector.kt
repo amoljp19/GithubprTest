@@ -1,6 +1,6 @@
 package com.softaai.githubprtest.di
 
-import com.softaai.githubprtest.Issues.viewmodels.IssuesListViewModel
+import com.softaai.githubprtest.issues.viewmodels.IssuesListViewModel
 import dagger.Component
 import javax.inject.Singleton
 

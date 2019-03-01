@@ -1,7 +1,9 @@
 package com.softaai.githubprtest.model
 
+import android.arch.persistence.room.Entity
 import com.squareup.moshi.Json
 
+@Entity
 data class LabelsItem(@Json(name = "default")
                       val default: Boolean = false,
                       @Json(name = "color")

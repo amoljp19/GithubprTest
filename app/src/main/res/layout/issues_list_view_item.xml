@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+                name="issueViewModel"
+                type="com.softaai.githubprtest.issues.viewmodels.IssueViewModel" />
+    </data>
+
+
+<LinearLayout
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content">
@@ -8,27 +18,28 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/pr_number"/>
+            android:text="@{issueViewModel.getIssuePrNumber()}"/>
 
     <TextView
             android:id="@+id/title"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/title"/>
+            android:text="@{issueViewModel.getIssueTitle()}"/>
 
     <TextView
             android:id="@+id/user"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/user"/>
+            android:text="@{issueViewModel.getIssueUser()}"/>
 
     <TextView
             android:id="@+id/patch_url"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/patch_url"/>
+            android:text="@{issueViewModel.getIssuePatchUrl()}"/>
 
 </LinearLayout>
+</layout>
